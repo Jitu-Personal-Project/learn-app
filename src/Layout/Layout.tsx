@@ -54,7 +54,7 @@ export default function Layout({
 }: LayoutProps) {
   const [darkMode, setDarkMode] = React.useState(false);
   const [widgetsStatus, setWidgetsStatus] = useState<widgetsStatusProps>({
-    noteBook: "open",
+    noteBook: "close",
     codeEditor: "close",
   });
 

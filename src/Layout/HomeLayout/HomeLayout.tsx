@@ -30,7 +30,9 @@ export default function HomeLayout() {
           <div
             className={`${appCurrentTheme.value}-theme  home-layout-content-menu-left-wrp  theme-bg ${contentLeftMenu ? "open" : "close"}`}
             onClick={handelContentLeftMenu}
-          ></div>
+          >
+            <div className="ribbon-menu"> More About Page</div>
+          </div>
 
           <div
             className={`${appCurrentTheme.value}-theme home-layout-content theme-bg`}
