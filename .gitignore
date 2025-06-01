@@ -1,6 +1,7 @@
 # dependencies
 /node_modules/
-
+/backend/node_modules/
+/GeneratorReactCom/node_modules/
 # build output
 /dist/
 /build/
