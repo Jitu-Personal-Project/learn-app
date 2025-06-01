@@ -1,0 +1,15 @@
+.tts-learn-language-selector-wrp {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.custom-select-height .MuiSelect-select {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.tts-language-selector-icon {
+  font-size: 0.2rem;
+}

@@ -1,0 +1,25 @@
+.notepad-title-wrp {
+  position: relative;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  flex: 1;
+  padding: 0 15px;
+}
+.notepad-title-wrp .title {
+  font-size: 18px;
+  padding: 0;
+  text-align: left;
+  margin: 20px 0 0 0;
+  color: #615f5f;
+}
+.close-icon-wrp {
+  width: 20px;
+  height: 20px;
+  margin-top: 25px;
+  margin-right: 50px;
+  cursor: pointer;
+}
+.MuiSvgIcon-root.MuiSvgIcon-fontSizeMedium.close-icon {
+  fill: black;
+}

@@ -1,0 +1,39 @@
+.dark-theme {
+  --primary-color: #000000;
+  --secondary-color: #171717;
+  --text-color: #ffffff;
+  --link-color: #4a90e2;
+  --hover-color: #555555;
+}
+.dark-theme.top-nav-wrp {
+  color: var(--text-color);
+}
+
+.dark-theme.theme-bg {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+}
+.dark-theme.theme-bg-secondary {
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+}
+.theme-border.dark {
+  border-color: #444444;
+}
+.MuiInputBase-formControl.dark-theme-select {
+  /* background-color: var(--secondary-color); */
+  background-color: #000;
+  color: var(--text-color);
+  border: 1px solid #444444;
+}
+
+.MuiInputBase-formControl.dark-theme-select svg {
+  fill: var(--text-color);
+}
+.dark-theme-sidebar.sidebar-wrp {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+}
+.dark-theme-sidebar.sidebar-wrp * {
+  color: var(--text-color);
+}

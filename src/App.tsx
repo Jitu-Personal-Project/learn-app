@@ -1,15 +1,15 @@
-import { useState } from "react";
-
 import Layout from "./Layout/Layout";
+import { AppProvider } from "./contexts/context"; // Import the context, not the hook
 import "./App.css";
+import { BrowserRouter } from "react-router-dom";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <>
-      <Layout />
-    </>
+    <BrowserRouter>
+      <AppProvider>
+        <Layout />
+      </AppProvider>
+    </BrowserRouter>
   );
 }
 

@@ -1,0 +1,321 @@
+.run-code-btn {
+  left: 50%;
+  top: -55px;
+  width: 110px;
+  height: 110px;
+  display: flex;
+  align-items: center;
+  background: #f5f5f5;
+  z-index: 99999;
+  color: #3d4a7a;
+  position: absolute;
+  border-radius: 8%;
+  justify-content: center;
+
+  cursor: pointer;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid #3d4a7a;
+  transform-origin: center;
+  font-size: 14px;
+  font-weight: bold;
+}
+.run-code-btn.active {
+  animation: rotate 300ms forwards;
+}
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.console-log-wrp {
+  position: relative;
+}
+.code-editor-wrapper {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  border-right-width: 1px;
+  background: #252526;
+  border-color: #1e1e1e;
+}
+.code-editor__header {
+  display: flex;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  height: 3rem;
+  background: #2d2d2d;
+  color: #fff;
+  gap: 1rem;
+}
+.left__header {
+  gap: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.code-editor__sidebar {
+  flex: 1.4;
+  height: 100%;
+  color: #fff;
+  border-right-width: 1px;
+  background-color: #121212;
+  display: flex;
+  align-items: flex-start;
+}
+.code-editor__sidebar.light .sidekick__icons .file_icons {
+  color: #7c7878;
+}
+
+.code-editor__sidebar.light .sidekick__icons .file_icons:hover {
+  color: #fff;
+  background-color: #afafaf;
+}
+.code-editor__sidebar.light {
+  background-color: #f4f3f3;
+  color: #000;
+}
+
+.code-editor__top-nav
+  .code-editor__top-nav__right
+  .code-editor--language-select,
+.code-editor__top-nav
+  .code-editor__top-nav__right
+  .code-editor--language-select:focus,
+.code-editor__top-nav
+  .code-editor__top-nav__right
+  .code-editor--language-select:hover {
+  outline: none !important;
+  border: none !important;
+}
+.code-editor__top-nav.vs-dark
+  .code-editor__top-nav__right
+  .code-editor--language-select {
+  background-color: #121212;
+  color: #fff;
+  border: 1px solid #3a3a3a;
+}
+.code-editor__sidebar.dark {
+  background-color: #121212;
+  color: #fff;
+}
+.code-editor__content {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  color: #fff;
+  flex: 1;
+}
+.code-editor__main__content {
+  display: flex;
+  height: 100%;
+  flex: 7;
+}
+.editor__main__content__wrapper,
+.editor__main__content,
+.code-editor__sidebar {
+  height: 100vh;
+}
+.file_icons {
+  width: 1.5rem;
+  height: 1.5rem;
+  cursor: pointer;
+  color: #d3d3d3; /* Default light color */
+  width: 100%;
+  height: 38px;
+  padding: 0 15px;
+  line-height: 70px;
+  display: flex;
+}
+
+.file_icons:hover {
+  transform: scale(1.1);
+  transition: transform 0.2s ease-in-out;
+  color: #ffffff; /* Brighter color on hover */
+  background-color: #5d5d5d; /* Brighter background color on hover */
+}
+.sidekick__icons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 50px;
+  margin-top: 20px;
+}
+.code-editor__layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #1e1e1e;
+  justify-content: space-between;
+}
+
+.code-editor__top-nav.light {
+  background-color: #ffffff;
+  color: #000000;
+  border-bottom: 1px solid #e0e0e0;
+}
+.code-editor__top-nav.vs-dark {
+  background-color: #000;
+  color: #d4d4d4;
+}
+.code-editor__top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+}
+
+.code-editor__main {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.code-editor__editor.light {
+  background-color: #fffffe;
+}
+.code-editor__editor.vs-dark {
+  background-color: #1e1e1e;
+}
+.code-editor__editor {
+  flex: 7;
+  height: 100%;
+  background-color: transparent;
+}
+
+.code-editor__terminal {
+  height: 30vh;
+  background-color: #1e1e1e;
+  color: #d4d4d4;
+  padding: 1rem;
+  overflow-y: auto;
+  position: relative;
+  overflow: visible;
+}
+
+.code-editor__terminal.light {
+  border-top: 1px solid #cac1c1;
+  background-color: #f5f5f5;
+  color: #000;
+}
+.code-editor__terminal.vs-dark {
+  border-top: 1px solid #cac1c1;
+  color: #d4d4d4;
+}
+.code-editor--close-btn svg {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.code-editor--close-btn {
+  width: 40px;
+  min-width: 40px !important;
+  max-width: 40px !important;
+  height: 40px;
+  padding: 0 !important;
+  align-items: center;
+  justify-content: center;
+  border: none !important;
+}
+.code-editor__terminal.dark {
+  background-color: #1e1e1e;
+  color: #d4d4d4;
+  border-top: 1px solid #4e4e4e;
+}
+.code-editor__terminal.dark .run-code-btn {
+  background: #1e1e1e;
+  color: #fff;
+}
+.MuiButton-iconSizeSmall {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.code-editor__top-nav__right {
+  display: flex;
+  gap: 1rem;
+}
+.folder-open-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+.file__header {
+  display: flex;
+  gap: 1rem;
+  margin-top: 29px;
+  font-size: 13px;
+  padding: 0 15px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.file__item__container.dark.active,
+.file__item__container.dark:hover {
+  background-color: #272626; /* Light theme active background */
+}
+
+.file__item__container.light.active,
+.file__item__container.light:hover {
+  background-color: #ffffff; /* Dark theme active background */
+}
+.file__item__container {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  padding: 3px 15px;
+  cursor: pointer;
+  font-size: 15px;
+  margin: 1px 0;
+}
+.add-file-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  cursor: pointer;
+}
+.file__item {
+}
+.file__item {
+  width: 120px !important;
+}
+.file__list {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 41vh);
+  overflow-y: auto;
+}
+.code-editor__top-nav.light .code-editor__top-nav__left .code-editor--save-btn {
+  background-color: #e7e1e1;
+  color: #fff;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  color: #000;
+  display: flex;
+  align-items: center;
+}
+.code-editor__top-nav.light
+  .code-editor__top-nav__left
+  .code-editor--save-btn:hover {
+  background-color: #f6f0f0;
+}
+.code-editor--save-btn:disabled {
+  background-color: #c4c4c4;
+  cursor: not-allowed;
+}
+.code-editor--save-btn:disabled:hover {
+  background-color: #c4c4c4;
+}
+.code-editor--add-file-select {
+  height: 32px;
+  width: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,0 +1,42 @@
+.ripple-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ripple-circle {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 120px;
+  height: 120px;
+  margin-left: -60px;
+  margin-top: -60px;
+  border: 2px solid #e6e6e680;
+  border-radius: 50%;
+  background: transparent;
+  animation: ripple-grow 800ms linear forwards; /* changed duration and removed infinite */
+  box-sizing: border-box;
+}
+
+@keyframes ripple-grow {
+  0% {
+    transform: scale(0.2);
+    opacity: 1;
+  }
+  80% {
+    opacity: 0.2;
+  }
+  100% {
+    transform: scale(8);
+    opacity: 0;
+  }
+}

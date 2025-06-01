@@ -1,0 +1,10 @@
+.app-name-wrp {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.app-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-primary);
+}

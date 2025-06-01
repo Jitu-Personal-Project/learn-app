@@ -1,0 +1,23 @@
+.transparent-theme {
+  --primary-color: transparent;
+  --secondary-color: #ffffff45;
+  --text-color: rgba(255, 255, 255, 0.87);
+  --link-color: #4a90e2;
+  --hover-color: rgba(255, 255, 255, 0.1);
+  --border-color: #dedede;
+}
+.transparent-theme.theme-bg {
+  background-color: var(--secondary-color);
+}
+.transparent-theme.theme-bg-img {
+  background-color: var(--primary-color);
+  background-image: url("../assets/bg.png"); /* Replace with your image URL */
+  background-size: cover;
+  color: var(--text-color);
+}
+.border-bottom {
+  border-bottom: 1px solid var(--border-color);
+}
+.border-right {
+  border-right: 1px solid var(--border-color);
+}

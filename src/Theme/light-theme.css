@@ -1,0 +1,60 @@
+.light-theme {
+  --primary-color: #ffff;
+  --secondary-color: #eff1f5;
+  --text-color: #000000;
+  --link-color: #4a90e2;
+  --hover-color: rgba(0, 0, 0, 0.1);
+  --bg-color: #f9f9f9;
+  --border-color: #dedede;
+}
+.light-theme.top-nav-wrp {
+  color: var(--text-color);
+}
+.light-theme.theme-bg {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+}
+.light-theme.theme-bg-secondary {
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+}
+.light-theme.theme-bg-secondary {
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+}
+.theme-border.dark {
+  border-color: #444444;
+}
+.MuiInputBase-formControl.light-theme-select {
+  /* background-color: var(--secondary-color); */
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+  border: 1px solid #444444;
+}
+
+.MuiInputBase-formControl.light-theme-select svg {
+  fill: var(--text-color);
+}
+.light-theme-sidebar.sidebar-wrp {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+}
+.light-theme-sidebar.sidebar-wrp * {
+  color: var(--text-color);
+}
+.light-theme.border-bottom {
+  border-bottom: 1px solid var(--border-color);
+}
+.light-theme.border-right {
+  border-right: 1px solid var(--border-color);
+}
+.MuiInputBase-formControl.light-theme-select {
+  /* background-color: var(--secondary-color); */
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  box-shadow: none;
+}
+.MuiInputBase-formControl.light-theme-select svg {
+  border: none;
+}

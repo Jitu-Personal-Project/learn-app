@@ -1,0 +1,50 @@
+@keyframes slideIn {
+  from {
+    right: -50%;
+  }
+  to {
+    right: 0;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    right: 0;
+  }
+  to {
+    right: -50%;
+  }
+}
+
+.notepad-wrp {
+  position: fixed;
+  top: 0;
+  right: -50%; /* Initially hidden */
+  width: 45%;
+  height: 100vh;
+  background: #ffffff;
+  z-index: 999999;
+  border-left: 1px solid #e5e5e5;
+  box-shadow: 6px -1px 11px 2px #d6c3c3;
+  animation: slideIn 0.5s forwards;
+}
+.notepad-wrp.close {
+  animation: slideOut 0.5s forwards;
+}
+.notepad-layout {
+  background-image: repeating-linear-gradient(
+    transparent,
+    transparent 31px,
+    rgb(204, 204, 204) 31px,
+    rgb(204, 204, 204) 32px
+  );
+  width: 100%;
+  height: 100%;
+}
+.page-inner-wrp {
+  padding: 30px 30px 80px 30px;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex: 1;
+}
