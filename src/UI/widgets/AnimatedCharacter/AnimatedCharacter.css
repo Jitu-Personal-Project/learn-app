@@ -1,0 +1,42 @@
+body {
+  align-items: flex-end;
+  background-color: #4571eb;
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  min-height: 100vh;
+}
+
+.character-animation {
+  height: 13rem;
+  width: 11rem;
+}
+
+.eyes {
+  animation: blink 3s infinite ease-in;
+  transform-origin: center;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    transform: scaleY(0);
+  }
+  2%,
+  99% {
+    transform: scaleY(1);
+  }
+}
+.mouth-wrp {
+  background: red;
+  width: 45px;
+  height: 10px;
+  border-radius: 9999px;
+  position: absolute;
+  left: 38%;
+  top: 60%;
+}
+.character-container {
+  position: relative;
+  align-self: center;
+}

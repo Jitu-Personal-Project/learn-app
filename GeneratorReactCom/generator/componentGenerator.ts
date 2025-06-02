@@ -1,3 +1,5 @@
+import { dynamicComponentImport } from "./componentImport/dynamicComponentImport";
+import { DataJsonTy } from "./dataType";
 import { writeFile } from "./util";
 import path from "path";
 
@@ -49,8 +51,8 @@ interface ComponentData {
   pageContent: ContentSection[];
 }
 
+const componentImports: string = "";
 // --- Functions ---
-
 // Generate icon imports based on the icons used in the page content
 const generateIconImports = (pageContent: ContentSection[]): string => {
   const icons = new Set<string>();
@@ -139,7 +141,7 @@ const generateContentSection = (pageContent: ContentSection[]): string => {
 };
 
 // Generate a React component based on the JSON data
-const generateComponent = async (data: ComponentData): Promise<boolean> => {
+const generateComponent = async (data: DataJsonTy): Promise<boolean> => {
   if (!data) return false;
 
   const { fileInformation, pageInformation, pageContent } = data;
@@ -175,6 +177,7 @@ const generateComponent = async (data: ComponentData): Promise<boolean> => {
     : "";
   const componentContent = `
     import React from 'react';
+    ${dynamicComponentImport(data)}
     ${iconImports}
    
     ${cssImport}

@@ -1,0 +1,48 @@
+.page-header-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  padding: 0;
+  overflow: hidden; /* Ensure child margins are respected */
+}
+.page-header-keywords {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin: 0;
+  padding: 0;
+  background-color: #2196f3;
+  color: #fff;
+  font-size: 12px;
+  border-radius: 3px;
+  padding: 0 5px;
+}
+
+.page-header-container .page-header-breadcrumb {
+  background-color: #f5f5f5; /* Set background color */
+  padding: 8px 16px;
+  width: 100%; /* Make breadcrumb full-width */
+  box-sizing: border-box;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+.breadcrumb-link {
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.breadcrumb-link.active-breadcrumb {
+  color: #1976d2; /* Highlight active breadcrumb */
+  font-weight: bold;
+}
+
+.breadcrumb-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.breadcrumb-play-icon {
+  margin-left: 8px; /* Add spacing between breadcrumb and play icon */
+  color: #1976d2; /* Match the active breadcrumb color */
+}

@@ -1,0 +1,20 @@
+.topic-title-wrp.concept-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0;
+  padding: 0;
+}
+.topic-title-wrp.concept-title .title {
+  display: flex;
+  font-size: 14px;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  font-weight: bold;
+}
+.topic-title-wrp.page-title .title {
+  font-weight: bold;
+  font-size: 17px;
+  margin: 0 0 10px 0;
+}

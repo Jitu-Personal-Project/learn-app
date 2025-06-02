@@ -1,0 +1,13 @@
+.draggable-ele {
+  cursor: move;
+  user-select: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+}
+
+.draggable-ele.dragging {
+  opacity: 0.8;
+}

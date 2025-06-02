@@ -1,4 +1,7 @@
 import React from 'react';
+import PageHeader from '../../UI/PageHeader/PageHeader';
+import TextToSpeech from '../../UI/Widgets/TextToSpeech/TextToSpeech';
+
 import CodeOutlinedIcon from '@mui/icons-material/Code';
 import AccessTimeOutlinedIcon from '@mui/icons-material/AccessTime';
 import LoopOutlinedIcon from '@mui/icons-material/Loop';
