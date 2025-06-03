@@ -3,6 +3,7 @@
   flex-direction: column;
   margin-bottom: 20px;
   padding: 0;
+  align-items: flex-start;
   overflow: hidden; /* Ensure child margins are respected */
 }
 .page-header-keywords {

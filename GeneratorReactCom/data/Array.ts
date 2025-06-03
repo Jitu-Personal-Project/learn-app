@@ -40,6 +40,68 @@ const data: DataJsonTy = {
   },
   pageContent: [
     {
+      type: "highlightContext",
+      title: "how to use this page",
+      content: [
+        {
+          id: "1", // ID of the highlight data.
+          content: "Read the concept introduction", // Text content of the highlight data.
+          icon: "AutoStoriesOutlinedIcon", // Icon for the highlight data.
+        },
+        {
+          id: "2", // ID of the highlight data.
+          content: "Listen to the audio explanation", // Text content of the highlight data.
+          icon: "PlayCircleFilledWhiteOutlinedIcon", // Icon for the highlight data.
+        },
+        {
+          id: "3", // ID of the highlight data.
+          content: "Review key concepts and examples", // Text content of the highlight data.
+          icon: "VpnKeyOutlinedIcon", // Icon for the highlight data.
+        },
+        {
+          id: "4", // ID of the highlight data.
+          content: "Try the practice exercises", // Text content of the highlight data.
+          icon: "FaceOutlinedIcon", // Icon for the highlight data.
+        },
+        {
+          id: "5", // ID of the highlight data.
+          content: "Take the quiz to test your understanding", // Text content of the highlight data.
+          icon: "QuestionMarkOutlinedIcon", // Icon for the highlight data.
+        },
+      ],
+    },
+    {
+      type: "highlightContext",
+      title: "how to use this page 22",
+      content: [
+        {
+          id: "1", // ID of the highlight data.
+          content: "Read the concept introduction", // Text content of the highlight data.
+          icon: "AutoStoriesOutlinedIcon", // Icon for the highlight data.
+        },
+        {
+          id: "2", // ID of the highlight data.
+          content: "Listen to the audio explanation", // Text content of the highlight data.
+          icon: "PlayCircleFilledWhiteOutlinedIcon", // Icon for the highlight data.
+        },
+        {
+          id: "3", // ID of the highlight data.
+          content: "Review key concepts and examples", // Text content of the highlight data.
+          icon: "VpnKeyOutlinedIcon", // Icon for the highlight data.
+        },
+        {
+          id: "4", // ID of the highlight data.
+          content: "Try the practice exercises", // Text content of the highlight data.
+          icon: "FaceOutlinedIcon", // Icon for the highlight data.
+        },
+        {
+          id: "5", // ID of the highlight data.
+          content: "Take the quiz to test your understanding", // Text content of the highlight data.
+          icon: "QuestionMarkOutlinedIcon", // Icon for the highlight data.
+        },
+      ],
+    },
+    {
       type: "article",
       title: "Understanding JavaScript Arrays",
       content:

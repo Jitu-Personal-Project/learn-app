@@ -1,5 +1,11 @@
 import { dynamicComponentImport } from "./componentImport/dynamicComponentImport";
-import { DataJsonTy } from "./dataType";
+import { reactBasicImports } from "./componentImport/reactBasicImport";
+import {
+  isHederComponent,
+  isHighlightContext,
+  isHighlightContextGlobally,
+} from "./componentUtils";
+import { ContentSection, DataJsonTy } from "./dataType";
 import { writeFile } from "./util";
 import path from "path";
 
@@ -15,16 +21,6 @@ interface PageHeader {
   pageTitle: string;
   description: string;
   keywords: string;
-}
-
-interface ContentSection {
-  number: string | number;
-  type: string;
-  title: string;
-  content: string;
-  bulletPoint?: BulletPoint[];
-  isReadyToListen?: boolean;
-  playIcon?: string;
 }
 
 interface FileInformation {
@@ -106,7 +102,12 @@ const generateBulletPoints = (bulletPoints?: BulletPoint[]): string => {
       </ul>
     `;
 };
-
+const generateHighlightContext = (
+  content: ContentSection,
+  idx: number
+): string => {
+  return `<HighlightContent highlightTitle="${content?.title}" highlightData={${`highlightContentData${idx}`}} />`;
+};
 // Generate content rendering
 const generateContentSection = (pageContent: ContentSection[]): string => {
   if (!pageContent || !Array.isArray(pageContent) || pageContent.length === 0) {
@@ -116,25 +117,11 @@ const generateContentSection = (pageContent: ContentSection[]): string => {
   return `
       <div className="page-content">
         ${pageContent
-          .map(
-            (content) => `
-          <section key="${content.number}" className="content-section ${content.type}">
-            <h2 className="content-title">${content.title}</h2>
-            <div className="content-body">${content.content}</div>
-            ${generateBulletPoints(content.bulletPoint)}
-            ${
-              content.isReadyToListen
-                ? `
-              <button className="listen-button">
-                <PlayCircleFilledWhiteOutlinedIcon />
-                Listen
-              </button>
-            `
-                : ""
+          .map((content, idx) => {
+            if (isHighlightContext(content)) {
+              return generateHighlightContext(content, idx);
             }
-          </section>
-        `
-          )
+          })
           .join("")}
       </div>
     `;
@@ -161,7 +148,6 @@ const generateComponent = async (data: DataJsonTy): Promise<boolean> => {
   const filePath = path.join(folderPath, `${file.name}${file.extension}`);
 
   const iconImports = generateIconImports(pageContent);
-
   const cssImport = cssFile?.name
     ? `import './${cssFile.name}${cssFile.extension}';`
     : "";
@@ -176,18 +162,30 @@ const generateComponent = async (data: DataJsonTy): Promise<boolean> => {
     `
     : "";
   const componentContent = `
-    import React from 'react';
+    ${reactBasicImports}
     ${dynamicComponentImport(data)}
     ${iconImports}
-   
     ${cssImport}
     
     const ${pageName} = () => {
+      ${
+        isHighlightContextGlobally(data)
+          ? data.pageContent
+              .map((highlightItem, idx) => {
+                if (highlightItem.type === "highlightContext") {
+                  return `const highlightContentData${idx} = ${JSON.stringify(highlightItem.content)};`;
+                }
+              })
+              .join("\n")
+          : ""
+      }
       return (
-        <div className="${pageName.toLowerCase()}-container">
-           ${headerContent}
+      <PageContentWrapper className="${pageName.toLowerCase()}-page-container">
+        <div className="${pageName.toLowerCase()}-inner-container">
+          ${isHederComponent(data) ? `<PageHeader pageTitle="${data.pageInformation.pageHeader?.pageTitle}"/> ` : ""}
           ${generateContentSection(pageContent)}
         </div>
+        </PageContentWrapper>
       );
     };
     
@@ -213,9 +211,7 @@ const generateDefaultCss = (componentName: string): string => {
   return `
     /* Styles for ${componentName} component */
     .${componentName.toLowerCase()}-container {
-      padding: 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
+     
     }
     .page-header {
       margin-bottom: 2rem;
@@ -287,7 +283,7 @@ const generateDefaultCss = (componentName: string): string => {
     }
     @media (max-width: 768px) {
       .${componentName.toLowerCase()}-container {
-        padding: 1rem;
+       
       }
       .page-header h1 {
         font-size: 2rem;

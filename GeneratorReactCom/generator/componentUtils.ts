@@ -1,4 +1,4 @@
-import { DataJsonTy } from "./dataType";
+import { ContentSection, DataJsonTy } from "./dataType";
 
 export const isHederComponent = (data: DataJsonTy): boolean => {
   if (
@@ -15,11 +15,20 @@ export const stringifyAndCompare = (data: any, match: string): boolean => {
   return jsonString.includes(match);
 };
 export const isReadyToListenGlobally = (data: DataJsonTy): boolean => {
-  console.log(
-    "isReadyToListenGlobally",
-    JSON.stringify(data).includes('"isReadyToListen":true')
-  );
   if (data && stringifyAndCompare(data, '"isReadyToListen":true')) {
+    return true;
+  }
+  return false;
+};
+export const isHighlightContextGlobally = (data: DataJsonTy): boolean => {
+  if (data && stringifyAndCompare(data, '"type":"highlightContext"')) {
+    return true;
+  }
+  return false;
+};
+
+export const isHighlightContext = (data: ContentSection): boolean => {
+  if (data && data.type === "highlightContext") {
     return true;
   }
   return false;

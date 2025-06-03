@@ -31,7 +31,7 @@ export default function HomeLayout() {
             className={`${appCurrentTheme.value}-theme  home-layout-content-menu-left-wrp  theme-bg ${contentLeftMenu ? "open" : "close"}`}
             onClick={handelContentLeftMenu}
           >
-            <div className="ribbon-menu"> More About Page</div>
+            {/* <div className="ribbon-menu"> More About Page</div> */}
           </div>
 
           <div

@@ -26,7 +26,7 @@ export default function PageHeader({
   breadcrumb,
 }: PageHeaderProps) {
   return (
-    <div className="page-header-container">
+    <header className="page-header-container">
       {breadcrumb && (
         <Box display="flex" alignItems="center" className="breadcrumb-wrapper">
           <Breadcrumbs
@@ -79,6 +79,6 @@ export default function PageHeader({
           })}
         </Box>
       )}
-    </div>
+    </header>
   );
 }

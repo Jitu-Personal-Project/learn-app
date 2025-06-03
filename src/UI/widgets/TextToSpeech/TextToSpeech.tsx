@@ -28,7 +28,7 @@ type TextToSpeechProps = {
   handelCloseTts?: () => void;
 };
 
-export const TextToSpeech: React.FC<TextToSpeechProps> = ({
+const TextToSpeech: React.FC<TextToSpeechProps> = ({
   isOpenTTS,
   audioText,
   language,
@@ -440,3 +440,4 @@ export const TextToSpeech: React.FC<TextToSpeechProps> = ({
     </div>
   );
 };
+export default TextToSpeech;

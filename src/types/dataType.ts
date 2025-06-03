@@ -19,11 +19,15 @@ export interface BulletPoint {
   textContent: string;
   icon: string;
 }
-
+export interface contentItem {
+  id: string | number;
+  content: string;
+  icon?: string;
+}
 export interface ContentSection {
   type: "highlightContext" | string;
   title?: string;
-  content?: string | { id: string | number; content: string; icon?: string }[];
+  content?: string | contentItem[];
   number?: string;
   isReadyToListen?: boolean;
   playIcon?: string;

@@ -1,0 +1,40 @@
+.learning-path-widgets,
+.highlight-component {
+  background-color: #eff6ff;
+  padding: 5px 20px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1;
+  width: 100%;
+  margin-top: 10px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+.highlight-component.dark {
+  background-color: #212121;
+}
+
+.learning-path-title,
+.highlight-title {
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: #166bc5;
+  font-size: 14px;
+}
+.learning-path-list,
+.highlight-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-align: left;
+  color: #166bc5;
+  font-size: 13px;
+}
+.highlight-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}

@@ -1,7 +1,9 @@
 # dependencies
 /node_modules/
 /backend/node_modules/
+/backend/package-lock.json
 /GeneratorReactCom/node_modules/
+/GeneratorReactCom/package-lock.json
 # build output
 /dist/
 /build/
@@ -41,3 +43,4 @@ pnpm-debug.log*
 /cypress/videos/
 /cypress/screenshots/
 /playwright-report/
+package-lock.json

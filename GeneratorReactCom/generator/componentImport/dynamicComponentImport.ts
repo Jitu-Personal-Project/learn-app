@@ -1,8 +1,13 @@
 import {
   headerComponent,
+  highlightContentComponent,
   textToSpeechComponent,
 } from "../ComponentPath/ComponentPath";
-import { isHederComponent, isReadyToListenGlobally } from "../componentUtils";
+import {
+  isHederComponent,
+  isHighlightContextGlobally,
+  isReadyToListenGlobally,
+} from "../componentUtils";
 import { DataJsonTy } from "../dataType";
 
 export const dynamicComponentImport = (data: DataJsonTy) => {
@@ -15,5 +20,6 @@ export const dynamicComponentImport = (data: DataJsonTy) => {
   let result = "";
   isHederComponent(data) && (result += headerComponent);
   isReadyToListenGlobally(data) && (result += textToSpeechComponent);
+  isHighlightContextGlobally(data) && (result += highlightContentComponent);
   return result;
 };

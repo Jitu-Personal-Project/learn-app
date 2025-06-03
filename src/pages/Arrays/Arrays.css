@@ -1,9 +1,7 @@
 
     /* Styles for Arrays component */
     .arrays-container {
-      padding: 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
+     
     }
     .page-header {
       margin-bottom: 2rem;
@@ -75,7 +73,7 @@
     }
     @media (max-width: 768px) {
       .arrays-container {
-        padding: 1rem;
+       
       }
       .page-header h1 {
         font-size: 2rem;
