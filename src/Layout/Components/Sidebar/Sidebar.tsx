@@ -1,23 +1,13 @@
 // crete reusable sidebar component
 import React from "react";
-import {
-  Box,
-  Drawer,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-} from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
+import { Box, List, ListItem } from "@mui/material";
 import { useAppContext } from "../../../contexts/context";
 import "./Sidebar.css";
 import routes from "../../../routes";
-import type { RouteType } from "../../../routes/routes";
 import { Link, useLocation } from "react-router-dom";
 
 export default function Sidebar() {
-  const { isSidebar, closeSidebar, handelSidebar, appCurrentTheme } =
-    useAppContext();
+  const { isSidebar, handelSidebar, appCurrentTheme } = useAppContext();
   const location = useLocation(); // Add this line
 
   const toggleDrawer =
