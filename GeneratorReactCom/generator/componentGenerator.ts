@@ -1,158 +1,16 @@
 import { dynamicComponentImport } from "./componentImport/dynamicComponentImport";
+import { generateIconImports } from "./componentImport/importUtils";
 import { reactBasicImports } from "./componentImport/reactBasicImport";
 import {
+  generateContentSection,
   isHederComponent,
-  isHighlightContext,
   isHighlightContextGlobally,
   isReadyToListenGlobally,
 } from "./componentUtils";
-import { ContentSection, DataJsonTy } from "./dataType";
+import { DataJsonTy } from "./dataType";
 import { writeFile } from "./util";
 import path from "path";
 
-// --- Type Definitions ---
-
-interface BulletPoint {
-  id: string | number;
-  icon?: string;
-  textContent: string;
-}
-
-interface PageHeader {
-  pageTitle: string;
-  description: string;
-  keywords: string;
-}
-
-interface FileInformation {
-  file: {
-    name: string;
-    extension: string;
-    folderName?: string;
-  };
-  cssFile?: {
-    name: string;
-    extension: string;
-    content?: string;
-  };
-}
-
-interface PageInformation {
-  pageName: string;
-  pageHeader?: PageHeader;
-}
-
-interface ComponentData {
-  fileInformation: FileInformation;
-  pageInformation: PageInformation;
-  pageContent: ContentSection[];
-}
-
-const componentImports: string = "";
-// --- Functions ---
-// Generate icon imports based on the icons used in the page content
-const generateIconImports = (pageContent: ContentSection[]): string => {
-  const icons = new Set<string>();
-
-  pageContent.forEach((content) => {
-    if (content.bulletPoint && Array.isArray(content.bulletPoint)) {
-      content.bulletPoint.forEach((bullet) => {
-        if (bullet.icon) {
-          icons.add(bullet.icon);
-        }
-      });
-    }
-    if (content.playIcon && content.playIcon.includes("Icon")) {
-      const iconName = content.playIcon.replace(/[</>]/g, "");
-      icons.add(iconName);
-    }
-  });
-
-  if (icons.size === 0) return "";
-
-  return Array.from(icons)
-    .map(
-      (icon) =>
-        `import ${icon} from '@mui/icons-material/${icon.replace("OutlinedIcon", "")}';`
-    )
-    .join("\n");
-};
-
-// Generate bullet points rendering
-const generateBulletPoints = (bulletPoints?: BulletPoint[]): string => {
-  if (
-    !bulletPoints ||
-    !Array.isArray(bulletPoints) ||
-    bulletPoints.length === 0
-  ) {
-    return "null";
-  }
-
-  return `
-      <ul className="bullet-points">
-        ${bulletPoints
-          .map(
-            (bullet) => `
-          <li key="${bullet.id}" className="bullet-point">
-            {${bullet.icon} && <${bullet.icon} className="bullet-icon" />}
-            <span>${bullet.textContent}</span>
-          </li>
-        `
-          )
-          .join("")}
-      </ul>
-    `;
-};
-//------------------------------------------------------
-const getPageHighlightAttributes = (
-  content: ContentSection,
-  idx: number
-): string => {
-  const contentHighlight = content.type === "highlightContext";
-  if (!contentHighlight) return "";
-  let attrs = `highlightTitle="${content?.title}" highlightData={${`highlightContentData${idx}`}}`;
-  if (content.isReadyToListen) {
-    attrs += ` isReadyToListen={${content.isReadyToListen}}`;
-  }
-  if (
-    content.isReadyToListen &&
-    content.audioSrc &&
-    content.audioSrc.length > 0
-  ) {
-    attrs += ` audioSrc={${JSON.stringify(content.audioSrc)}}`;
-  } else if (content.audioTextContent) {
-    attrs += ` audioTextContent={${JSON.stringify(content.audioTextContent)}}`;
-  }
-  attrs += ` handelListenAudio={handelListenAudio}`;
-  return attrs;
-};
-//------------------------------------------------------
-const generateHighlightContext = (
-  content: ContentSection,
-  idx: number
-): string => {
-  return `<HighlightContent ${getPageHighlightAttributes(content, idx)} />`;
-};
-// Generate content rendering
-const generateContentSection = (pageContent: ContentSection[]): string => {
-  if (!pageContent || !Array.isArray(pageContent) || pageContent.length === 0) {
-    return '<div className="page-content">No content available</div>';
-  }
-
-  return `
-      <div className="page-content">
-        ${pageContent
-          .map((content, idx) => {
-            if (isHighlightContext(content)) {
-              return generateHighlightContext(content, idx);
-            }
-          })
-          .join("")}
-      </div>
-    `;
-};
-
-// Generate a React component based on the JSON data
 const generateComponent = async (data: DataJsonTy): Promise<boolean> => {
   if (!data) return false;
 

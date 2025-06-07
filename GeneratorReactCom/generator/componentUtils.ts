@@ -33,3 +33,59 @@ export const isHighlightContext = (data: ContentSection): boolean => {
   }
   return false;
 };
+
+//------------------------------------------------------
+
+//------------------------------------------------------
+export const getPageHighlightAttributes = (
+  content: ContentSection,
+  idx: number
+): string => {
+  const contentHighlight = content.type === "highlightContext";
+  if (!contentHighlight) return "";
+  let attrs = `highlightTitle="${content?.title}" highlightData={${`highlightContentData${idx}`}}`;
+  if (content.isReadyToListen) {
+    attrs += ` isReadyToListen={${content.isReadyToListen}}`;
+  }
+  if (
+    content.isReadyToListen &&
+    content.audioSrc &&
+    content.audioSrc.length > 0
+  ) {
+    attrs += ` audioSrc={${JSON.stringify(content.audioSrc)}}`;
+  } else if (content.audioTextContent) {
+    attrs += ` audioTextContent={${JSON.stringify(content.audioTextContent)}}`;
+  }
+  attrs += ` handelListenAudio={handelListenAudio}`;
+  return attrs;
+};
+//------------------------------------------------------
+export const generateHighlightContext = (
+  content: ContentSection,
+  idx: number
+): string => {
+  return `<HighlightContent ${getPageHighlightAttributes(content, idx)} />`;
+};
+//------------------------------------------------------
+// Generate content rendering
+export const generateContentSection = (
+  pageContent: ContentSection[]
+): string => {
+  if (!pageContent || !Array.isArray(pageContent) || pageContent.length === 0) {
+    return '<div className="page-content">No content available</div>';
+  }
+
+  return `
+  <div className="page-content">
+  ${pageContent
+    .map((content, idx) => {
+      if (isHighlightContext(content)) {
+        return generateHighlightContext(content, idx);
+      }
+    })
+    .join("")}
+    </div>
+    `;
+};
+
+//------------------------------------------------------

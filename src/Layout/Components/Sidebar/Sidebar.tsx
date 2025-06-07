@@ -1,10 +1,10 @@
 // crete reusable sidebar component
 import React from "react";
-import { Box, List, ListItem } from "@mui/material";
+import { List, ListItem } from "@mui/material";
 import { useAppContext } from "../../../contexts/context";
-import "./Sidebar.css";
 import routes from "../../../routes";
 import { Link, useLocation } from "react-router-dom";
+import "./Sidebar.css";
 
 interface RouteType {
   path: string;
