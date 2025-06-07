@@ -6,30 +6,14 @@ import "./Sidebar.css";
 import routes from "../../../routes";
 import { Link, useLocation } from "react-router-dom";
 
+interface RouteType {
+  path: string;
+  name: string;
+}
+
 export default function Sidebar() {
-  const { isSidebar, handelSidebar, appCurrentTheme } = useAppContext();
+  const { isSidebar, appCurrentTheme } = useAppContext();
   const location = useLocation(); // Add this line
-
-  const toggleDrawer =
-    (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
-      if (
-        (event.type === "keydown" &&
-          (event as React.KeyboardEvent).key === "Tab") ||
-        (event as React.KeyboardEvent).key === "Shift"
-      ) {
-        return;
-      }
-      handelSidebar(open);
-    };
-
-  const list = () => (
-    <Box
-      sx={{ width: 250 }}
-      role="presentation"
-      onClick={toggleDrawer(false)}
-      onKeyDown={toggleDrawer(false)}
-    ></Box>
-  );
 
   return (
     <div
