@@ -20,6 +20,7 @@ interface VoiceOption {
 type TextToSpeechProps = {
   isOpenTTS?: boolean;
   audioText?: string;
+  audioSrc?: string; // ✅ NEW PROP
   language?: string;
   defaultVoice?: string;
   ttsMode?: "user" | "admin" | "developer" | "setting";
@@ -31,6 +32,7 @@ type TextToSpeechProps = {
 const TextToSpeech: React.FC<TextToSpeechProps> = ({
   isOpenTTS,
   audioText,
+  audioSrc, // ✅ NEW PROP
   language,
   defaultVoice,
   ttsMode,
@@ -58,7 +60,13 @@ const TextToSpeech: React.FC<TextToSpeechProps> = ({
   const synth = useRef<SpeechSynthesis | null>(null);
   const utterance = useRef<SpeechSynthesisUtterance | null>(null);
   const mouthAnimationInterval = useRef<number | null>(null);
+  // -----------------------------------------------------------
+  const audioRef = useRef<HTMLAudioElement | null>(null); // ✅
+  // ✅ Helper to know if we're in audio mode
+  const isAudioMode = !!audioSrc;
+  // ✅ Play/Pause logic for audio mode
 
+  // -----------------------------------------------------------
   useEffect(() => {
     synth.current = window.speechSynthesis;
     startBlinkInterval();
@@ -148,7 +156,7 @@ const TextToSpeech: React.FC<TextToSpeechProps> = ({
         const newHeight = Math.floor(Math.random() * 4) + 2; // Random height between 2-6
         return newHeight;
       });
-    }, 150);
+    }, 90);
   };
 
   const stopMouthAnimation = () => {
@@ -216,50 +224,116 @@ const TextToSpeech: React.FC<TextToSpeechProps> = ({
   };
 
   const handlePlay = () => {
-    if (!synth.current) return;
-
-    if (isPlaying) {
-      synth.current.pause();
-      setIsPlaying(false);
-      setIsSpeaking(false);
-      setIsPaused(true);
-      stopMouthAnimation();
-    } else {
-      if (isPaused) {
-        synth.current.resume();
+    if (isAudioMode) {
+      if (!audioRef.current) return;
+      if (isPlaying) {
+        audioRef.current.pause();
+        setIsPlaying(false);
+        setIsSpeaking(false);
+        setIsPaused(true);
+        stopMouthAnimation();
+      } else {
+        audioRef.current.play();
         setIsPlaying(true);
         setIsSpeaking(true);
         setIsPaused(false);
         startMouthAnimation();
+      }
+    } else {
+      if (!synth.current) return;
+      if (isPlaying) {
+        synth.current.pause();
+        setIsPlaying(false);
+        setIsSpeaking(false);
+        setIsPaused(true);
+        stopMouthAnimation();
       } else {
-        if (!utterance.current) {
-          createUtterance();
+        if (isPaused) {
+          synth.current.resume();
+          setIsPlaying(true);
+          setIsSpeaking(true);
+          setIsPaused(false);
+          startMouthAnimation();
+        } else {
+          if (!utterance.current) {
+            createUtterance();
+          }
+          synth.current.speak(utterance.current!);
+          setIsPlaying(true);
+          setIsSpeaking(true);
+          startMouthAnimation();
         }
-        synth.current.speak(utterance.current!);
-        setIsPlaying(true);
-        setIsSpeaking(true);
-        startMouthAnimation();
       }
     }
   };
 
   const handleReset = () => {
-    if (synth.current) {
-      synth.current.cancel();
+    if (isAudioMode) {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.currentTime = 0;
+      }
       setIsPlaying(false);
       setIsSpeaking(false);
       setIsPaused(false);
-      setCurrentWordIndex(-1);
-      utterance.current = null;
       stopMouthAnimation();
-      setWords((prev) =>
-        prev.map((word) => ({
-          ...word,
-          isHighlighted: false,
-        }))
-      );
+    } else {
+      if (synth.current) {
+        synth.current.cancel();
+        setIsPlaying(false);
+        setIsSpeaking(false);
+        setIsPaused(false);
+        setCurrentWordIndex(-1);
+        utterance.current = null;
+        stopMouthAnimation();
+        setWords((prev) =>
+          prev.map((word) => ({
+            ...word,
+            isHighlighted: false,
+          }))
+        );
+      }
     }
   };
+  // ------------------------------------------------------------
+  // ✅ Audio event handlers for mouth animation
+  useEffect(() => {
+    if (!isAudioMode || !audioRef.current) return;
+    const audio = audioRef.current;
+
+    const onPlay = () => {
+      setIsPlaying(true);
+      setIsSpeaking(true);
+      setIsPaused(false);
+      startMouthAnimation();
+    };
+    const onPause = () => {
+      // If audio ended, onEnded will handle state, so only handle pause here
+      if (!audio.ended) {
+        setIsPlaying(false);
+        setIsSpeaking(false);
+        setIsPaused(true);
+        stopMouthAnimation();
+      }
+    };
+    // const onEnded = () => {
+    //   console.log("AUDIO ENDED EVENT FIRED");
+    //   setIsPlaying(false);
+    //   setIsSpeaking(false);
+    //   setIsPaused(false);
+    //   stopMouthAnimation();
+    // };
+
+    audio.addEventListener("play", onPlay);
+    audio.addEventListener("pause", onPause);
+    // audio.addEventListener("ended", onEnded);
+    return () => {
+      audio.removeEventListener("play", onPlay);
+      audio.removeEventListener("pause", onPause);
+      // audio.removeEventListener("ended", onEnded);
+    };
+  }, [isAudioMode, audioSrc]);
+  // ------------------------------------------------------------
 
   return (
     <div className={`text-to-speech-main-wrp`}>
@@ -276,6 +350,22 @@ const TextToSpeech: React.FC<TextToSpeechProps> = ({
             />
           </div>
 
+          {/* ✅ Audio element for audioSrc mode */}
+          {isAudioMode && (
+            <audio
+              ref={audioRef}
+              src={audioSrc}
+              style={{ display: "none" }}
+              preload="auto"
+              controls // <-- add this for debugging
+              onEnded={() => {
+                setIsPlaying(false);
+                setIsSpeaking(false);
+                setIsPaused(false);
+                stopMouthAnimation();
+              }}
+            />
+          )}
           <div className="buttons">
             <button
               onClick={handlePlay}
@@ -306,6 +396,7 @@ const TextToSpeech: React.FC<TextToSpeechProps> = ({
               className={`settings-button character-button ${
                 ttsMode == "setting" ? "active" : ""
               }`}
+              disabled={isAudioMode} // Disable settings in audio mode
             >
               <Settings size={20} />
             </button>
@@ -317,6 +408,15 @@ const TextToSpeech: React.FC<TextToSpeechProps> = ({
               <CloseIcon fontSize="small" />
             </button>
           </div>
+          {/* Only show TTS controls if not in audio mode */}
+          {!isAudioMode &&
+            ttsMode &&
+            (ttsMode == "admin" || ttsMode == "setting") && (
+              <div className="text-to-speech-container">
+                {/* ...existing textarea, controls, settings, and text display... */}
+                {/* ...existing code... */}
+              </div>
+            )}
           {ttsMode && (ttsMode == "admin" || ttsMode == "setting") && (
             <div className="text-to-speech-container">
               <textarea

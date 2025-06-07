@@ -1,8 +1,9 @@
 import React from "react";
 import TopicTitle from "../TopicTitle/TopicTitle";
-import { Box, Breadcrumbs, Link } from "@mui/material";
+import { Box, Breadcrumbs, Link, Typography, useTheme } from "@mui/material";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow"; // Import the play icon
+import SlowMotionVideoIcon from "@mui/icons-material/SlowMotionVideo";
 import "./PageHeader.css";
 
 export interface BreadcrumbItem {
@@ -16,6 +17,9 @@ export interface PageHeaderProps {
   keywords?: string;
   isReadyToListen?: boolean;
   breadcrumb?: BreadcrumbItem[];
+  audioSrc?: string; // Optional audio source URL
+  audioTextContent?: string;
+  handelListenAudio?: (text?: string, audioPath?: string) => void;
 }
 
 export default function PageHeader({
@@ -24,7 +28,11 @@ export default function PageHeader({
   keywords,
   isReadyToListen,
   breadcrumb,
+  audioSrc,
+  audioTextContent,
+  handelListenAudio,
 }: PageHeaderProps) {
+  const theme = useTheme();
   return (
     <header className="page-header-container">
       {breadcrumb && (
@@ -53,13 +61,33 @@ export default function PageHeader({
         </Box>
       )}
       {pageTitle && (
-        <>
+        <Box className="page-Info-title-wrp">
           <TopicTitle
             className={"page-Info-title"}
             title={pageTitle}
             mode="pageTitle"
           />
-        </>
+
+          <Box className="block-ele">
+            {isReadyToListen && pageTitle && (
+              <button
+                className={`listen-audio-btn ${theme.palette.mode}`}
+                onClick={() => {
+                  if (handelListenAudio) {
+                    handelListenAudio(audioTextContent, audioSrc);
+                    if (!audioSrc && !audioTextContent) {
+                      handelListenAudio(pageTitle, audioSrc);
+                    }
+                  } else {
+                    console.warn("handelListenAudio function is not provided");
+                  }
+                }}
+              >
+                <SlowMotionVideoIcon />
+              </button>
+            )}
+          </Box>
+        </Box>
       )}
       {description && <p>{description}</p>}
       {keywords && (

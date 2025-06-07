@@ -4,6 +4,7 @@ import {
   isHederComponent,
   isHighlightContext,
   isHighlightContextGlobally,
+  isReadyToListenGlobally,
 } from "./componentUtils";
 import { ContentSection, DataJsonTy } from "./dataType";
 import { writeFile } from "./util";
@@ -102,11 +103,35 @@ const generateBulletPoints = (bulletPoints?: BulletPoint[]): string => {
       </ul>
     `;
 };
+//------------------------------------------------------
+const getPageHighlightAttributes = (
+  content: ContentSection,
+  idx: number
+): string => {
+  const contentHighlight = content.type === "highlightContext";
+  if (!contentHighlight) return "";
+  let attrs = `highlightTitle="${content?.title}" highlightData={${`highlightContentData${idx}`}}`;
+  if (content.isReadyToListen) {
+    attrs += ` isReadyToListen={${content.isReadyToListen}}`;
+  }
+  if (
+    content.isReadyToListen &&
+    content.audioSrc &&
+    content.audioSrc.length > 0
+  ) {
+    attrs += ` audioSrc={${JSON.stringify(content.audioSrc)}}`;
+  } else if (content.audioTextContent) {
+    attrs += ` audioTextContent={${JSON.stringify(content.audioTextContent)}}`;
+  }
+  attrs += ` handelListenAudio={handelListenAudio}`;
+  return attrs;
+};
+//------------------------------------------------------
 const generateHighlightContext = (
   content: ContentSection,
   idx: number
 ): string => {
-  return `<HighlightContent highlightTitle="${content?.title}" highlightData={${`highlightContentData${idx}`}} />`;
+  return `<HighlightContent ${getPageHighlightAttributes(content, idx)} />`;
 };
 // Generate content rendering
 const generateContentSection = (pageContent: ContentSection[]): string => {
@@ -161,6 +186,18 @@ const generateComponent = async (data: DataJsonTy): Promise<boolean> => {
       </header>
     `
     : "";
+  const getPageHeaderAttributes = (data: DataJsonTy): string => {
+    const header = data.pageInformation.pageHeader;
+    if (!header) return "";
+    let attrs = `pageTitle="${header.pageTitle}" isReadyToListen={${header.isReadyToListen}}`;
+    if (header.audioSrc) {
+      attrs += ` audioSrc={${JSON.stringify(header.audioSrc)}}`;
+    } else if (header.audioTextContent) {
+      attrs += ` audioTextContent={${JSON.stringify(header.audioTextContent)}}`;
+    }
+    attrs += ` handelListenAudio={handelListenAudio}`;
+    return attrs;
+  };
   const componentContent = `
     ${reactBasicImports}
     ${dynamicComponentImport(data)}
@@ -168,6 +205,41 @@ const generateComponent = async (data: DataJsonTy): Promise<boolean> => {
     ${cssImport}
     
     const ${pageName} = () => {
+    ${isReadyToListenGlobally(data) ? "const [isOpenTTS, setIsOpenTTS] = useState(false);" : ""}
+    ${isReadyToListenGlobally(data) ? "const [audioText, setAudioText] = useState(''); \n const [audioPath, setAudioPath] = useState(''); " : ""}
+    ${isReadyToListenGlobally(data) ? 'const [ttsMode, setTtsMode] = useState< "user" | "admin" | "developer" | "setting" >("user");' : ""}
+    ${
+      isReadyToListenGlobally(data)
+        ? `const playShineAudio = useAudioPlay("/shine-in.mp3", 0.2);
+        const handelMode = (ttsMode: "user" | "admin" | "developer" | "setting") => {
+          setTtsMode(ttsMode);
+        };
+        const handelOpenTts = () => {
+          setIsOpenTTS(true);
+        };
+        const handelCloseTts = () => {
+          setIsOpenTTS(false);
+        };
+        const handelListenAudio = ( audioTextContent?: string, audioPathString?: string) => {
+              if (isOpenTTS === false) {
+               if (audioPathString) {
+                setAudioText("");
+                  setAudioPath(audioPathString);
+                }
+                if (audioTextContent) {
+                  setAudioPath("");
+                  setAudioText(audioTextContent);
+                }
+                handelOpenTts();
+                playShineAudio();
+              }
+              if (isOpenTTS === true) {
+                handelCloseTts();
+              }
+            };`
+        : ""
+    }
+
       ${
         isHighlightContextGlobally(data)
           ? data.pageContent
@@ -179,10 +251,24 @@ const generateComponent = async (data: DataJsonTy): Promise<boolean> => {
               .join("\n")
           : ""
       }
+      
       return (
       <PageContentWrapper className="${pageName.toLowerCase()}-page-container">
+         ${
+           isReadyToListenGlobally(data)
+             ? ` <TextToSpeech
+                  isOpenTTS={isOpenTTS}
+                  handelMode={handelMode}
+                  ttsMode={ttsMode}
+                  audioSrc={audioPath}
+                  audioText={audioText}
+                  handelOpenTts={handelOpenTts}
+                  handelCloseTts={handelCloseTts}
+                  />`
+             : ""
+         }
         <div className="${pageName.toLowerCase()}-inner-container">
-          ${isHederComponent(data) ? `<PageHeader pageTitle="${data.pageInformation.pageHeader?.pageTitle}"/> ` : ""}
+          ${isHederComponent(data) ? `<PageHeader ${getPageHeaderAttributes(data)} /> ` : ""}
           ${generateContentSection(pageContent)}
         </div>
         </PageContentWrapper>

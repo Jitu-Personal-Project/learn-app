@@ -47,3 +47,11 @@
   margin-left: 8px; /* Add spacing between breadcrumb and play icon */
   color: #1976d2; /* Match the active breadcrumb color */
 }
+.page-Info-title-wrp {
+  display: flex;
+  align-items: center;
+}
+.page-Info-title-wrp .topic-title-wrp .title {
+  margin: 0;
+  padding: 0;
+}

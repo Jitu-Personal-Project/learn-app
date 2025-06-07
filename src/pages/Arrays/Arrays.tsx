@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PageContentWrapper from '../../UI/PageContentWrapper/PageContentWrapper';
+import useAudioPlay from '../../Utils/hooks/useAudioPlay';
 
 import PageHeader from '../../UI/PageHeader/PageHeader';
 import TextToSpeech from '../../UI/Widgets/TextToSpeech/TextToSpeech';
@@ -13,6 +14,38 @@ import PlayCircleFilledWhiteOutlinedIcon from '@mui/icons-material/PlayCircleFil
 import './Arrays.css';
 
 const Arrays = () => {
+  const [isOpenTTS, setIsOpenTTS] = useState(false);
+  const [audioText, setAudioText] = useState('');
+  const [audioPath, setAudioPath] = useState('');
+  const [ttsMode, setTtsMode] = useState<'user' | 'admin' | 'developer' | 'setting'>('user');
+  const playShineAudio = useAudioPlay('/shine-in.mp3', 0.2);
+  const handelMode = (ttsMode: 'user' | 'admin' | 'developer' | 'setting') => {
+    setTtsMode(ttsMode);
+  };
+  const handelOpenTts = () => {
+    setIsOpenTTS(true);
+  };
+  const handelCloseTts = () => {
+    setIsOpenTTS(false);
+  };
+  const handelListenAudio = (audioTextContent?: string, audioPathString?: string) => {
+    if (isOpenTTS === false) {
+      if (audioPathString) {
+        setAudioText('');
+        setAudioPath(audioPathString);
+      }
+      if (audioTextContent) {
+        setAudioPath('');
+        setAudioText(audioTextContent);
+      }
+      handelOpenTts();
+      playShineAudio();
+    }
+    if (isOpenTTS === true) {
+      handelCloseTts();
+    }
+  };
+
   const highlightContentData0 = [
     { id: '1', content: 'Read the concept introduction', icon: 'AutoStoriesOutlinedIcon' },
     {
@@ -46,17 +79,32 @@ const Arrays = () => {
 
   return (
     <PageContentWrapper className="arrays-page-container">
+      <TextToSpeech
+        isOpenTTS={isOpenTTS}
+        handelMode={handelMode}
+        ttsMode={ttsMode}
+        audioSrc={audioPath}
+        audioText={audioText}
+        handelOpenTts={handelOpenTts}
+        handelCloseTts={handelCloseTts}
+      />
       <div className="arrays-inner-container">
-        <PageHeader pageTitle="JavaScript Arrays" />
+        <PageHeader
+          pageTitle="JavaScript Arrays"
+          isReadyToListen={true}
+          handelListenAudio={handelListenAudio}
+        />
 
         <div className="page-content">
           <HighlightContent
             highlightTitle="how to use this page"
             highlightData={highlightContentData0}
+            handelListenAudio={handelListenAudio}
           />
           <HighlightContent
             highlightTitle="how to use this page 22"
             highlightData={highlightContentData1}
+            handelListenAudio={handelListenAudio}
           />
         </div>
       </div>

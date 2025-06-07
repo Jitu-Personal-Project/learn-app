@@ -4,6 +4,26 @@
   text-align: center;
   width: 100vw;
 }
+/* ------------------------ */
+.block-ele {
+  display: flex;
+  align-items: flex-start;
+  padding: 0 !important;
+  justify-content: flex-start;
+}
+.listen-audio-btn {
+  width: 25px;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.listen-audio-btn svg {
+  width: 15px;
+}
 .full-width {
   width: 100vw;
 }

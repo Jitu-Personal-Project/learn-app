@@ -23,7 +23,7 @@
   width: 45%;
   height: 100vh;
   background: #ffffff;
-  z-index: 999999;
+  z-index: 200;
   border-left: 1px solid #e5e5e5;
   box-shadow: 6px -1px 11px 2px #d6c3c3;
   animation: slideIn 0.5s forwards;

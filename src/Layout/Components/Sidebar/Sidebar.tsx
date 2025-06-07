@@ -50,21 +50,22 @@ export default function Sidebar() {
       }`}
     >
       <List className="sidebar-list">
-        {routes.map((route: RouteType, index) => (
-          <ListItem
-            key={`menu-item-${index}`}
-            className={`nav-item  ${
-              location.pathname === route.path ? "nav-item-active" : ""
-            }`}
-          >
-            <Link to={route.path} className="nav-link">
-              {route.name}
-            </Link>
-            <div
-              className={`${appCurrentTheme.value}-theme active-menu-icon-wrp theme-bg`}
-            ></div>
-          </ListItem>
-        ))}
+        {routes.map((route: RouteType, index) => {
+          const isActive = location.pathname === route.path;
+          return (
+            <ListItem
+              key={`menu-item-${index}`}
+              className={`nav-item${isActive ? " nav-item-active active" : ""}`}
+            >
+              <Link to={route.path} className="nav-link">
+                {route.name}
+              </Link>
+              <div
+                className={`${appCurrentTheme.value}-theme active-menu-icon-wrp theme-bg`}
+              ></div>
+            </ListItem>
+          );
+        })}
       </List>
     </div>
   );

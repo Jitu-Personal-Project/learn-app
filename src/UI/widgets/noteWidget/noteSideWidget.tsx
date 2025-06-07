@@ -40,7 +40,6 @@ const NoteSideWidget = ({
     handelWidgetsStatus(localWidgetsStatus);
   };
 
-  console.log("widgetsStatus", widgetsStatus, handelWidgetsStatus);
   const handleMouseDown = (e: React.MouseEvent) => {
     const element = e.currentTarget as HTMLElement;
     const rect = element.getBoundingClientRect();

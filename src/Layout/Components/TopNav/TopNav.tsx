@@ -50,9 +50,7 @@ export default function topNav() {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  useEffect(() => {
-    console.log("Current Theme:", appCurrentTheme);
-  }, [appCurrentTheme]);
+  useEffect(() => {}, [appCurrentTheme]);
   const theme = useTheme();
   // const { isOpenSidebar, setIsOpenSidebar, openSidebar, closeSidebar } =
   return (

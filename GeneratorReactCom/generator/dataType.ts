@@ -9,9 +9,11 @@ export interface FileInfo {
 
 export interface PageHeader {
   pageTitle: string;
-  description: string;
-  keywords: string;
-  isReadyToListen: boolean;
+  description?: string;
+  keywords?: string;
+  isReadyToListen?: boolean;
+  audioSrc?: string;
+  audioTextContent?: string;
 }
 
 export interface BulletPoint {
@@ -26,6 +28,8 @@ export interface ContentSection {
   content?: string | { id: string | number; content: string; icon?: string }[];
   number?: string;
   isReadyToListen?: boolean;
+  audioSrc?: string;
+  audioTextContent?: string;
   playIcon?: string;
   bulletPoint?: BulletPoint[];
 }
