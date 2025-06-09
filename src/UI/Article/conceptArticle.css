@@ -1,0 +1,120 @@
+.concept-number {
+  display: flex;
+  margin-right: 0.75rem;
+  justify-content: center;
+  align-items: center;
+  border-radius: 9999px;
+  width: 2rem;
+  height: 2rem;
+  font-weight: 700;
+  color: #2563eb;
+  background-color: #dbeafe;
+  font-size: 14px;
+}
+
+.concept-article-widgets.concept-title {
+  display: flex;
+}
+.concept-article-widgets .concept-text {
+  display: flex;
+}
+.list-head {
+  display: flex;
+  gap: 10px;
+}
+.MuiList-root.concept-list-wrp {
+  margin: 0;
+  padding: 0;
+  margin-top: 10px;
+}
+.MuiList-root.concept-list-wrp .MuiListItem-root,
+.MuiList-root.concept-list-wrp .MuiListItem-root .MuiListItemText-root {
+  margin: 0;
+  padding: 0;
+}
+.concept-list-number {
+  font-size: 14px;
+  font-weight: bold;
+}
+.MuiList-root.concept-list-wrp .MuiListItem-root {
+  margin: 0 0 5px 0;
+  padding: 0;
+}
+.listen-audio-btn {
+  width: 25px;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+}
+.listen-audio-btn.dark {
+  color: #ffffff;
+}
+.listen-audio-btn svg {
+  width: 15px;
+}
+.concept-text-wrp {
+  display: flex;
+  flex-direction: column;
+}
+div.block-ele {
+  display: flex;
+  align-items: flex-start;
+  padding: 0 !important;
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.concept-article-widgets .concept-title {
+  font-size: 1.25rem;
+  display: flex;
+  margin: 5px 0;
+  justify-items: center;
+  align-items: center;
+}
+
+.concept-number {
+  margin-right: 8px;
+}
+
+.concept-text {
+  margin-bottom: 16px;
+}
+
+.concept-list-wrp {
+  margin-top: 8px;
+}
+
+.concept-list-item {
+  align-items: flex-start;
+}
+
+.list-head {
+  font-size: 1rem;
+}
+
+.listen-audio-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.list-mail-head {
+  border-bottom: 1px solid #e1e1e1;
+  display: inline-flex;
+  padding: 0 30px 10px 0;
+}
+.list-view-btn .topic-title-wrp.concept-title .title {
+  display: flex;
+  align-items: center;
+  font-size: 11px;
+}
+.list-view-btn {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+/* ------------------- Theme css -------------------- */
+.concept-list-wrp.dark .concept-list-item {
+}
+/* --------------------------------------- */

@@ -5,6 +5,7 @@ import useAudioPlay from '../../Utils/hooks/useAudioPlay';
 import PageHeader from '../../UI/PageHeader/PageHeader';
 import TextToSpeech from '../../UI/Widgets/TextToSpeech/TextToSpeech';
 import HighlightContent from '../../UI/Widgets/HighlightContent/HighlightContent';
+import Article from '../../UI/Article/Article';
 
 import CodeOutlinedIcon from '@mui/icons-material/Code';
 import AccessTimeOutlinedIcon from '@mui/icons-material/AccessTime';
@@ -77,6 +78,10 @@ const Arrays = () => {
     },
   ];
 
+  // Add this: for image gallery data arrays
+
+  // Add this: for dynamic image data arrays/objects
+
   return (
     <PageContentWrapper className="arrays-page-container">
       <TextToSpeech
@@ -99,11 +104,16 @@ const Arrays = () => {
           <HighlightContent
             highlightTitle="how to use this page"
             highlightData={highlightContentData0}
-            handelListenAudio={handelListenAudio}
           />
           <HighlightContent
             highlightTitle="how to use this page 22"
             highlightData={highlightContentData1}
+          />
+          <Article
+            title="Understanding JavaScript Arrays"
+            content="Arrays in JavaScript are used to store multiple values in a single variable. They are a special type of object with built-in methods to perform common operations."
+            number="1"
+            isReadyToListen={true}
             handelListenAudio={handelListenAudio}
           />
         </div>

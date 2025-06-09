@@ -1,12 +1,12 @@
-import { dynamicComponentImport } from "./componentImport/dynamicComponentImport";
-import { generateIconImports } from "./componentImport/importUtils";
-import { reactBasicImports } from "./componentImport/reactBasicImport";
 import {
-  generateContentSection,
   isHederComponent,
   isHighlightContextGlobally,
   isReadyToListenGlobally,
-} from "./componentUtils";
+} from "./Checks/checks";
+import { dynamicComponentImport } from "./componentImport/dynamicComponentImport";
+import { generateIconImports } from "./componentImport/importUtils";
+import { reactBasicImports } from "./componentImport/reactBasicImport";
+import { generateContentSection } from "./componentUtils";
 import { DataJsonTy } from "./dataType";
 import { writeFile } from "./util";
 import path from "path";
@@ -109,6 +109,28 @@ const generateComponent = async (data: DataJsonTy): Promise<boolean> => {
               .join("\n")
           : ""
       }
+      // Add this: for image gallery data arrays
+      ${data.pageContent
+        .map((content, idx) => {
+          if (
+            content.type === "imageGallery" &&
+            Array.isArray(content.content)
+          ) {
+            return `const imageGalleryData${idx} = ${JSON.stringify(content.content)};`;
+          }
+        })
+        .filter(Boolean)
+        .join("\n")}
+
+        // Add this: for dynamic image data arrays/objects
+      ${data.pageContent
+        .map((content, idx) => {
+          if (content.type === "image" && content.content) {
+            return `const dynamicImageData${idx} = ${JSON.stringify(content.content)};`;
+          }
+        })
+        .filter(Boolean)
+        .join("\n")}
       
       return (
       <PageContentWrapper className="${pageName.toLowerCase()}-page-container">

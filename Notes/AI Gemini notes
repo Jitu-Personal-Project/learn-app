@@ -9,3 +9,17 @@ How to use this course ?
 4. Check or write notes in the Sidekick menu.
 5. Practice with code exercises.
 6. Take the quiz to test yourself.
+
+Prompt
+
+<!-- ------------ -->
+
+You are in React component generator. In my project GeneratorReactCom, I have an existing system that generates reusable functional React page components based on templates. Based on this system in existing generator create logic for DynamicImage component include in generator function.
+
+<!-- ------------ -->
+
+You are a React component generator. In my project GeneratorReactCom, I have an existing system that generates reusable functional React page components using template-based logic.
+Based on this system, update the generator function to include logic for generating a new component called ${DynamicImage}.
+Use TypeScript for type safety.
+Follow the same file structure, naming conventions, and export format as existing generated components.
+Return only the code changes required in the generator logic and file path and file name.

@@ -42,34 +42,11 @@ const data: DataJsonTy = {
   pageContent: [
     {
       type: "article",
-      title: "Understanding JavaScript Welcome",
-      content:
-        "Welcome in JavaScript are used to store multiple values in a single variable. They are a special type of object with built-in methods to perform common operations.",
-      number: "1",
+      title: "How to use this course",
       isReadyToListen: true,
-      playIcon: "<PlayCircleFilledWhiteOutlinedIcon/>",
-      bulletPoint: [
-        {
-          id: "1",
-          textContent: "Creating and initializing array",
-          icon: "CodeOutlinedIcon",
-        },
-        {
-          id: "2",
-          textContent: "Common array methods and their time complexity",
-          icon: "AccessTimeOutlinedIcon",
-        },
-        {
-          id: "3",
-          textContent: "Array traversal techniques",
-          icon: "LoopOutlinedIcon",
-        },
-        {
-          id: "4",
-          textContent: "Multi-dimensional array",
-          icon: "GridOnOutlinedIcon",
-        },
-      ],
+      audioTextContent: "hello",
+      content: "read the concept overview",
+      number: 1,
     },
     {
       type: "highlightContext",
@@ -109,6 +86,45 @@ const data: DataJsonTy = {
           icon: "QuestionMarkOutlinedIcon", // Icon for the highlight data.
         },
       ],
+    },
+    {
+      type: "imageGallery",
+      content: [
+        {
+          id: 1,
+          url: "https://cdn.pixabay.com/photo/2024/06/19/08/18/woman-8839452_1280.jpg",
+        },
+        {
+          id: 2,
+          url: "https://media.istockphoto.com/id/1452731336/photo/blue-colored-megaphone-standing-out-from-the-crowd.jpg?s=1024x1024&w=is&k=20&c=vsvKQVvz7mYjbJxK0NnljSQinbXIxHcP5EFgOqC4cM8=",
+        },
+        {
+          id: 3,
+          url: "https://media.istockphoto.com/id/1468173966/photo/cocktail-party-bright-fruity-and-citrus-alcoholic-drinks-with-gin-vodka-vermouth-and-juice.jpg?s=1024x1024&w=is&k=20&c=UZoYFu6ODQaLQ__zzayqhe6OUZ6G-QG9cdpdeqSUpwk=",
+        },
+        {
+          id: 4,
+          url: "https://media.istockphoto.com/id/1406358305/photo/row-of-different-color-cars-on-asphalt-parking-lot-at-cloudy-summer-day.jpg?s=1024x1024&w=is&k=20&c=A6DTnCvdASKyUQRIpk0RQ_B21KzhYTnHaJnxsMTmZpI=",
+        },
+      ],
+    },
+    {
+      type: "image",
+      content: {
+        id: "1",
+        url: "https://cdn.pixabay.com/photo/2024/06/19/08/18/woman-8839452_1280.jpg",
+        alt: "First image",
+        height: "300px",
+      },
+    },
+    {
+      type: "article",
+      title: "How to use this course",
+      isReadyToListen: true,
+      audioTextContent: "hello",
+      content:
+        "Arrays are fundamental data structures that allow you to store multiple values in a single variable. They are used extensively in programming for managing collections of data.",
+      number: 1,
     },
   ],
   routesInformation: {

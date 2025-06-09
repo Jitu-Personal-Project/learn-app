@@ -1,13 +1,19 @@
 import {
-  headerComponent,
-  highlightContentComponent,
-  textToSpeechComponent,
-} from "../ComponentPath/ComponentPath";
-import {
+  isArticleGlobally,
+  isComponentTypeGlobally,
   isHederComponent,
   isHighlightContextGlobally,
   isReadyToListenGlobally,
-} from "../componentUtils";
+} from "../Checks/checks";
+import {
+  articleComponent,
+  headerComponent,
+  highlightContentComponent,
+  textToSpeechComponent,
+  imageGalleryComponent,
+  dynamicImageComponent,
+} from "../ComponentPath/ComponentPath";
+
 import { DataJsonTy } from "../dataType";
 
 export const dynamicComponentImport = (data: DataJsonTy) => {
@@ -20,6 +26,11 @@ export const dynamicComponentImport = (data: DataJsonTy) => {
   let result = "";
   isHederComponent(data) && (result += headerComponent);
   isReadyToListenGlobally(data) && (result += textToSpeechComponent);
-  isHighlightContextGlobally(data) && (result += highlightContentComponent);
+  isComponentTypeGlobally(data, "highlightContext") &&
+    (result += highlightContentComponent);
+  isComponentTypeGlobally(data, "article") && (result += articleComponent);
+  isComponentTypeGlobally(data, "imageGallery") &&
+    (result += imageGalleryComponent);
+  isComponentTypeGlobally(data, "image") && (result += dynamicImageComponent);
   return result;
 };

@@ -1,3 +1,5 @@
+import { imageGalleryComponent } from "./ComponentPath/ComponentPath";
+
 export interface FileInfo {
   folderName?: string;
   name: string;
@@ -21,12 +23,31 @@ export interface BulletPoint {
   textContent: string;
   icon: string;
 }
-
+export interface contentType {
+  type:
+    | "highlightContext"
+    | "article"
+    | "code"
+    | "quiz"
+    | "image"
+    | "imageGallery"
+    | "video"
+    | "audio";
+}
+export interface contentItemProps {
+  id?: string | number;
+  content?: string;
+  icon?: string;
+  url?: string;
+  alt?: string;
+  width?: string;
+  height?: string;
+}
 export interface ContentSection {
-  type: "highlightContext" | string;
+  type: contentType["type"];
   title?: string;
-  content?: string | { id: string | number; content: string; icon?: string }[];
-  number?: string;
+  content?: string | contentItemProps[] | contentItemProps;
+  number?: number | string;
   isReadyToListen?: boolean;
   audioSrc?: string;
   audioTextContent?: string;

@@ -7,3 +7,6 @@ export const textToSpeechComponent = `import TextToSpeech from "${WidgetsPath}/T
 export const highlightContentComponent = `import HighlightContent from "${WidgetsPath}/HighlightContent/HighlightContent";\n`;
 export const pageContentWrapper = `import PageContentWrapper from "${UIPath}/PageContentWrapper/PageContentWrapper";\n`;
 export const useAudioPlayComponent = `import useAudioPlay  from "${UtilPath}/hooks/useAudioPlay";\n`;
+export const articleComponent = `import Article  from "${UIPath}/Article/Article";\n`;
+export const imageGalleryComponent = `import ImageGallery  from "${UIPath}/ImageGallery/ImageGallery";\n`;
+export const dynamicImageComponent = `import DynamicImage from "${UIPath}/DynamicImage/DynamicImage";\n`;
